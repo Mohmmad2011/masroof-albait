@@ -1,0 +1,10 @@
+{
+  "name": "مصروف البيت",
+  "short_name": "مصروف البيت",
+  "description": "تطبيق لإدارة مصروف البيت والطلبيات",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f7f8fb",
+  "theme_color": "#0f4c75",
+  "icons": [{ "src": "icon.png", "sizes": "512x512", "type": "image/png" }]
+}
