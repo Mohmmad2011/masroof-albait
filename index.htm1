@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مصروف البيت</title>
+<style>
+*{box-sizing:border-box;font-family:tahoma}
+body{background:#f4f6f9;margin:0;padding:20px}
+.container{max-width:600px;margin:auto;background:#fff;border-radius:15px;padding:20px;box-shadow:0 5px 20px rgba(0,0,0,.1)}
+header{text-align:center}
+.summary{display:flex;gap:10px;margin:15px 0}
+.card{flex:1;padding:12px;border-radius:10px;text-align:center;font-weight:bold}
+.income{background:#e8f5e9;color:#2e7d32}
+.expense{background:#ffebee;color:#c62828}
+.balance{background:#e3f2fd;color:#1565c0}
+input,select,button{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:1px solid #ddd;font-size:16px}
+button{background:#2c3e50;color:#fff;cursor:pointer;border:none}
+#list{list-style:none;padding:0}
+#list li{display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #eee}
+</style>
+</head>
+<body>
+<div class="container">
+<header><h1>🏠 مصروف البيت 💰</h1><p>سجل دخلك ومصروفك</p></header>
+<div class="summary">
+<div class="card income">دخل<br><span id="t-income">0</span></div>
+<div class="card expense">مصروف<br><span id="t-expense">0</span></div>
+<div class="card balance">الباقي<br><span id="t-balance">0</span></div>
+</div>
+<select id="type"><option value="income">دخل 💵</option><option value="expense">مصروف 🛒</option></select>
+<input id="desc" placeholder="الوصف مثلا: راتب">
+<input id="amount" type="number" placeholder="المبلغ">
+<button onclick="addItem()">إضافة</button>
+<ul id="list"></ul>
+</div>
+<script>
+let items=JSON.parse(localStorage.getItem('masroof')||'[]');
+function render(){
+let inc=0,exp=0,list=document.getElementById('list');list.innerHTML='';
+items.forEach((it,i)=>{
+if(it.type=='income')inc+=it.amount;else exp+=it.amount;
+list.innerHTML+=`<li><span>${it.desc} - ${it.amount} د.أ</span><span onclick="del(${i})" style="cursor:pointer">❌</span></li>`;
+});
+document.getElementById('t-income').innerText=inc;
+document.getElementById('t-expense').innerText=exp;
+document.getElementById('t-balance').innerText=inc-exp;
+localStorage.setItem('masroof',JSON.stringify(items));
+}
+function addItem(){
+let type=document.getElementById('type').value;
+let desc=document.getElementById('desc').value;
+let amount=parseFloat(document.getElementById('amount').value);
+if(!desc||!amount)return alert('عبي الوصف والمبلغ');
+items.push({type,desc,amount});
+document.getElementById('desc').value='';document.getElementById('amount').value='';
+render();
+}
+function del(i){items.splice(i,1);render();}
+render();
+</script>
+</body>
+</html>
