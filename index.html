@@ -5,104 +5,97 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مصروفات المنزل</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0f6d38">
 <style>
-:root{
- --bg:#f5f7f6; --card:#ffffff; --text:#1a1a1a; --muted:#6b7280;
- --green:#0f6d38; --green-light:#e6f4ea; --red:#dc2626; --border:#e5e7eb;
-}
-[data-theme="dark"]{
- --bg:#121212; --card:#1e1e1e; --text:#f0f0f0; --muted:#9ca3af;
- --green:#16a34a; --green-light:#1a2e1f; --border:#2d2d2d;
-}
-*{box-sizing:border-box;font-family:Tajawal,system-ui}
-body{margin:0;background:var(--bg);color:var(--text);transition:0.3s}
-header{background:var(--green);color:white;padding:16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
-header h1{margin:0;font-size:20px}
+:root{--bg:#f3f4f6;--card:#ffffff;--text:#111827;--muted:#6b7280;--green:#0f6d38;--green-light:#e6f4ea;--red:#ef4444;--red-light:#fef2f2;--blue:#3b82f6;--blue-light:#eff6ff;--border:#e5e7eb}
+[data-theme="dark"]{--bg:#0f0f0f;--card:#1e1e1e;--text:#f0f0f0;--muted:#9ca3af;--green:#22c55e;--green-light:#132a1a;--red:#f87171;--red-light:#2a1515;--blue:#60a5fa;--blue-light:#162032;--border:#2a2a2a}
+*{box-sizing:border-box;font-family:Tajawal,system-ui} body{margin:0;background:var(--bg);color:var(--text);transition:0.3s;padding-bottom:80px}
+header{background:var(--green);color:white;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
 #themeToggle{background:rgba(255,255,255,0.2);border:none;color:white;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer}
 .container{max-width:600px;margin:0 auto;padding:16px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:16px;transition:0.3s}
-.row{display:flex;gap:12px}
+.card{background:var(--card);border-radius:20px;padding:16px;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,0.05);border:1px solid var(--border)}
+.top3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
+.box{border-radius:16px;padding:14px;text-align:center}
+.box small{display:block;color:var(--muted);font-size:13px}.box b{font-size:17px}
+.box.green{background:var(--green-light);color:var(--green)}.box.red{background:var(--red-light);color:var(--red)}.box.blue{background:var(--blue-light);color:var(--blue)}
+.progress-row{display:flex;align-items:center;gap:20px;justify-content:space-between}
+.circle{width:90px;height:90px;border-radius:50%;display:grid;place-items:center;position:relative;background:conic-gradient(var(--green) 0%, #e5e7eb 0%);transition:0.5s}
+.circle span{background:var(--card);width:72px;height:72px;border-radius:50%;display:grid;place-items:center;text-align:center}
 .input{width:100%;padding:12px;border:1px solid var(--border);border-radius:12px;background:var(--card);color:var(--text)}
-.btn{background:var(--green);color:white;border:none;padding:12px 18px;border-radius:12px;font-weight:bold;cursor:pointer;width:100%}
-.stat{flex:1;text-align:center;padding:12px;background:var(--green-light);border-radius:12px}
-.stat b{display:block;font-size:20px}
-.small{color:var(--muted);font-size:13px}
+.btn{background:var(--green);color:white;border:none;padding:12px;border-radius:12px;width:100%;font-weight:bold;cursor:pointer}
 .expense{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
-.fab{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--green);color:white;width:56px;height:56px;border-radius:50%;border:none;font-size:28px;box-shadow:0 4px 12px rgba(0,0,0,0.3)}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0;z-index:20}
+.bottom-nav div{text-align:center;font-size:12px;color:var(--muted);cursor:pointer}.bottom-nav div.active{color:var(--green)}
+.fab{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:#0f5c9a;color:white;width:60px;height:60px;border-radius:18px;border:none;font-size:30px;box-shadow:0 6px 20px rgba(0,0,0,0.25);z-index:30}
 </style>
 </head>
 <body>
-<header>
-<h1>🏠 مصروفات المنزل</h1>
-<button id="themeToggle" title="الوضع الداكن">🌙</button>
-</header>
+<header><h1 style="margin:0;font-size:18px">🏠 مصروفات المنزل</h1><button id="themeToggle" title="الوضع الداكن">🌙</button></header>
 
 <div class="container">
-<div class="card">
-<h3 style="margin:0 0 10px">💰 راتب الأسرة والميزانية</h3>
-<div class="row">
-<input id="salary" class="input" type="number" placeholder="راتب الشهر">
-<input id="budget" class="input" type="number" placeholder="الميزانية">
+<div class="card" style="display:flex;justify-content:space-between;align-items:center">
+<span style="font-size:14px">📅 الميزانية <span id="monthName"></span> <small id="editBudget" style="color:var(--green);cursor:pointer"> ✏️ تعديل الميزانية</small></span>
 </div>
-<button class="btn" style="margin-top:12px" onclick="saveSalary()">حفظ</button>
-<div class="row" style="margin-top:16px">
-<div class="stat"><span class="small">راتب الشهر</span><b id="sSalary">0</b></div>
-<div class="stat"><span class="small">المصروف</span><b id="sSpent" style="color:var(--red)">0</b></div>
-<div class="stat"><span class="small">المتبقي</span><b id="sLeft" style="color:var(--green)">0</b></div>
-</div>
+
+<div class="top3">
+<div class="box blue"><small>الباقي</small><b id="leftTxt">0.00 د.أ</b></div>
+<div class="box red"><small>مصروف</small><b id="spentTxt">0.00 د.أ</b></div>
+<div class="box green"><small>الميزانية</small><b id="budgetTxt">0.00 د.أ</b></div>
 </div>
 
 <div class="card">
-<h3 style="margin:0 0 10px">📝 المصروفات</h3>
-<div id="list"></div>
-<div class="row" style="margin-top:12px">
-<input id="eName" class="input" placeholder="اسم المصروف">
-<input id="ePrice" class="input" type="number" placeholder="السعر">
+<div class="progress-row">
+<div><div style="color:var(--muted)">قديش صرفت هذا الشهر؟</div><b id="spentBig" style="font-size:22px">0.00 د.أ</b><div><small id="countTxt" style="color:var(--muted)">0 عملات</small></div></div>
+<div class="circle" id="circle"><span><b id="percentTxt">0%</b><small style="font-size:10px;color:var(--muted)">من الميزانية</small></span></div>
 </div>
-<button class="btn" style="margin-top:12px" onclick="addExpense()">+ إضافة</button>
+<div style="margin-top:12px" class="row">
+<input id="salary" class="input" type="number" placeholder="الميزانية">
+<button class="btn" style="width:auto;padding:12px 20px" onclick="saveBudget()">حفظ</button>
+</div>
+</div>
+
+<div class="card"><div style="display:flex;justify-content:space-between"><b>🔥 أكثر الأقسام صرفاً</b></div><div id="topCats" style="margin-top:10px;color:var(--muted)">لا يوجد</div></div>
+
+<div class="card"><div style="display:flex;justify-content:space-between"><b>📋 آخر المصروفات</b><small style="color:var(--green);cursor:pointer" onclick="showAll()">عرض الكل</small></div><div id="list" style="margin-top:10px"></div>
+<div style="display:flex;gap:10px;margin-top:14px"><input id="eName" class="input" placeholder="اسم المصروف"><input id="ePrice" class="input" type="number" placeholder="السعر"><button class="btn" style="width:auto" onclick="addExpense()">+</button></div>
 </div>
 </div>
 
 <button class="fab" onclick="document.getElementById('eName').focus()">+</button>
 
+<div class="bottom-nav">
+<div class="active">🏠<br>الرئيسية</div><div>📄<br>السجل</div><div>🛒<br>الطلبيات</div><div>📊<br>التقارير</div><div>⚙️<br>الإعدادات</div>
+</div>
+
 <script>
-// --- النظام الداكن ---
-const toggle = document.getElementById('themeToggle');
-const html = document.documentElement;
-let theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-html.setAttribute('data-theme', theme);
-toggle.textContent = theme==='dark' ? '☀️' : '🌙';
+// داكن
+const btn=document.getElementById('themeToggle'); let th=localStorage.getItem('theme')||'light';
+document.documentElement.setAttribute('data-theme',th); if(btn) btn.textContent=th==='dark'?'☀️':'🌙';
+if(btn) btn.onclick=()=>{th=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',th);localStorage.setItem('theme',th);btn.textContent=th==='dark'?'☀️':'🌙'};
 
-toggle.onclick = ()=>{
-  theme = html.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
-  html.setAttribute('data-theme', theme);
-  localStorage.setItem('theme', theme);
-  toggle.textContent = theme==='dark' ? '☀️' : '🌙';
-};
+// بيانات
+let data=JSON.parse(localStorage.getItem('home_exp_v2')||'{"budget":0,"exp":[]}');
+document.getElementById('monthName').textContent=new Date().toLocaleDateString('ar-JO',{month:'long',year:'numeric'});
 
-// --- المنطق القديم ---
-let data = JSON.parse(localStorage.getItem('home_exp')||'{"salary":0,"budget":0,"exp":[]}');
-function saveSalary(){
- data.salary = +document.getElementById('salary').value||0;
- data.budget = +document.getElementById('budget').value||0;
- save();
-}
-function addExpense(){
- const n=document.getElementById('eName').value, p=+document.getElementById('ePrice').value;
- if(!n||!p) return;
- data.exp.push({n,p,d:new Date().toLocaleDateString('ar-JO')});
- document.getElementById('eName').value='';document.getElementById('ePrice').value='';
- save();
-}
-function save(){localStorage.setItem('home_exp',JSON.stringify(data));render();}
+function saveBudget(){ data.budget=+document.getElementById('salary').value||0; save(); }
+function addExpense(){ const n=document.getElementById('eName').value, p=+document.getElementById('ePrice').value; if(!n||!p) return; data.exp.push({n,p,d:new Date().toLocaleDateString('ar-JO')}); document.getElementById('eName').value='';document.getElementById('ePrice').value=''; save(); }
+function save(){ localStorage.setItem('home_exp_v2',JSON.stringify(data)); render(); }
 function render(){
- let spent=data.exp.reduce((a,b)=>a+b.p,0);
- document.getElementById('sSalary').textContent=data.salary;
- document.getElementById('sSpent').textContent=spent;
- document.getElementById('sLeft').textContent=data.salary-spent;
- document.getElementById('list').innerHTML=data.exp.map((e,i)=>`<div class="expense"><span>${e.n} <small class="small">${e.d}</small></span><span>${e.p} <button onclick="data.exp.splice(${i},1);save()" style="background:none;border:none;color:var(--red)">✕</button></span></div>`).reverse().join('')||'<p class="small">لا يوجد مصروفات</p>';
+ let spent=data.exp.reduce((a,b)=>a+b.p,0); let left=data.budget-spent; let perc=data.budget?Math.min(100,Math.round(spent/data.budget*100)):0;
+ document.getElementById('budgetTxt').textContent=data.budget.toFixed(2)+' د.أ';
+ document.getElementById('spentTxt').textContent=spent.toFixed(2)+' د.أ';
+ document.getElementById('leftTxt').textContent=left.toFixed(2)+' د.أ';
+ document.getElementById('spentBig').textContent=spent.toFixed(2)+' د.أ';
+ document.getElementById('countTxt').textContent=data.exp.length+' عملات';
+ document.getElementById('percentTxt').textContent=perc+'%';
+ document.getElementById('circle').style.background=`conic-gradient(var(--green) ${perc}%, var(--border) ${perc}%)`;
+ document.getElementById('list').innerHTML=data.exp.slice(-5).reverse().map((e,i)=>`<div class="expense"><span>${e.n} <small style="color:var(--muted)">${e.d}</small></span><span>${e.p.toFixed(2)} <button onclick="data.exp.splice(${data.exp.length-1-i},1);save()" style="background:none;border:none;color:var(--red)">✕</button></span></div>`).join('')||'<p style="color:var(--muted)">لا يوجد</p>';
+ // أكثر الأقسام
+ let map={}; data.exp.forEach(e=>{map[e.n]=(map[e.n]||0)+e.p});
+ let sorted=Object.entries(map).sort((a,b)=>b[1]-a[1]).slice(0,3);
+ document.getElementById('topCats').innerHTML=sorted.length?sorted.map(([k,v])=>`<div style="display:flex;justify-content:space-between;padding:6px 0"><span>${k}</span><b>${v.toFixed(2)} د.أ</b></div>`).join(''):'لا يوجد';
 }
+function showAll(){ document.getElementById('list').innerHTML=data.exp.map((e,i)=>`<div class="expense"><span>${e.n} <small style="color:var(--muted)">${e.d}</small></span><span>${e.p.toFixed(2)} <button onclick="data.exp.splice(${i},1);save()" style="background:none;border:none;color:var(--red)">✕</button></span></div>`).reverse().join(''); }
+document.getElementById('editBudget').onclick=()=>document.getElementById('salary').focus();
 render();
 if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 </script>
