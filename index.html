@@ -29,8 +29,7 @@ header{background:var(--green);color:white;padding:14px 16px;display:flex;justif
 </style>
 </head>
 <body>
-<header><h1 style="margin:0;font-size:18px">🏠 مصروفات المنزل</h1><button id="themeToggle" title="الوضع الداكن">🌙</button></header>
-
+<header style="flex-direction:column;gap:6px;padding:16px"><div style="width:100%;display:flex;justify-content:space-between;align-items:center"><h1 style="margin:0;font-size:18px">🏠 مصروفات المنزل</h1><button id="themeToggle" title="الوضع الداكن">🌙</button></div><div id="liveDate" style="width:100%;text-align:center;background:rgba(255,255,255,0.15);padding:8px;border-radius:12px;font-size:13px;line-height:1.6"></div></header>
 <div class="container">
 <div class="card" style="display:flex;justify-content:space-between;align-items:center">
 <span style="font-size:14px">📅 الميزانية <span id="monthName"></span> <small id="editBudget" style="color:var(--green);cursor:pointer"> ✏️ تعديل الميزانية</small></span>
