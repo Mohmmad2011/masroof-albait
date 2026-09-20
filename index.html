@@ -126,20 +126,42 @@ function updateClock(){let now=new Date();let days=['الأحد','الإثنين
 populateCurrencies();applyLang(curLang);render();
 if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 </script>
-<!-- قسم تحميل التطبيق مع QR -->
-<div style="text-align:center; padding:20px; background:#ffffff; margin:20px; border-radius:15px; border:2px solid #198754;">
-  <p style="font-weight:bold; font-size:18px; color:#198754; margin-bottom:10px;">📱 مصروفات المنزل</p>
+<!-- قسم تحميل التطبيق مع QR - تم التعديل -->
+<div style="text-align:center; padding:20px; background:#ffffff; margin:20px; border-radius:15px; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
+  <p style="font-weight:bold; font-size:18px; color:#198754; margin-bottom:10px;">📲 حمل تطبيق مصروفات المنزل</p>
   
-  <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://mohmmad2011.github.io/masroof-albait/" 
+  <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://mohmmad2011.github.io/masroof-albait/?v=1000" 
        style="width:160px; height:160px; border-radius:10px; border:4px solid #eee;">
-  
+
   <p style="font-size:12px; color:#666; margin:10px 0;">امسح الكود بالكاميرا</p>
 
-  <div style="margin-top:10px;">
-    <a href="https://mohmmad2011.github.io/masroof-albait/" style="display:inline-block; background:#0d6efd; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin:5px;">🔗 فتح</a>
-    <a href="https://api.whatsapp.com/send?text=جرب تطبيق مصروفات المنزل https://mohmmad2011.github.io/masroof-albait/" style="display:inline-block; background:#25D366; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin:5px;">📤 واتساب</a>
+  <div style="margin-top:15px;">
+    <a href="https://mohmmad2011.github.io/masroof-albait/?v=1000" 
+       style="background:#2563eb; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin:5px; display:inline-block;">🔗 فتح على الموقع</a>
+    
+    <a href="#" onclick="copyLink(); return false;" 
+       style="background:#6b7280; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin:5px; display:inline-block;">📋 نسخ الرابط</a>
+    
+    <a href="#" onclick="shareWA(); return false;" 
+       style="background:#22c55e; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin:5px; display:inline-block;">💬 واتساب</a>
   </div>
+  <p id="copyMsg" style="display:none; color:green; font-weight:bold; margin-top:10px;">✅ تم نسخ الرابط</p>
 </div>
 
-</body>
-</html>
+<script>
+function copyLink(){
+  let link = "https://mohmmad2011.github.io/masroof-albait/?v=1000";
+  navigator.clipboard.writeText(link).then(()=>{
+    let m=document.getElementById('copyMsg');
+    m.style.display='block';
+    setTimeout(()=>m.style.display='none',2000);
+  });
+}
+function shareWA(){
+  let link = "https://mohmmad2011.github.io/masroof-albait/?v=1000";
+  // يفتح واتساب على نفس الموقع
+  window.location.href = "https://wa.me/?text="+encodeURIComponent(link);
+}
+</script>
+ 
+
