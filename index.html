@@ -1,174 +1,88 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>مصروف البيت</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مصروف البيت - التطبيق الكبير</title>
 <style>
-:root{--green:#10b981;--red:#ef4444;--blue:#2563eb;--bg:#f8fafc}
-*{box-sizing:border-box;font-family:'Segoe UI',Tahoma}
-body{margin:0;background:var(--bg);padding-bottom:90px}
-.header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.08);position:sticky;top:0;z-index:10}
-.card{background:#fff;border-radius:18px;padding:16px;margin:12px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+*{box-sizing:border-box;font-family:'Segoe UI',Tahoma}body{margin:0;background:#f8fafc;padding-bottom:90px}
+.hdr{position:sticky;top:0;z-index:10;background:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.card{background:#fff;border-radius:20px;margin:12px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.bbox{border-radius:14px;padding:12px;text-align:center}
-.bg-g{background:#ecfdf5}.bg-r{background:#fef2f2}.bg-b{background:#eff6ff}
-.circle{width:88px;height:88px;border-radius:50%;border:8px solid #e5e7eb;border-top-color:var(--green);display:flex;flex-direction:column;align-items:center;justify-content:center}
-.fab{width:52px;height:52px;border-radius:16px;background:#1e40af;color:#fff;border:none;font-size:28px;display:flex;align-items:center;justify-content:center}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e5e7eb;display:flex;justify-content:space-around;padding:8px 0}
-.nav{border:none;background:none;color:#9ca3af;font-size:11px;display:flex;flex-direction:column;align-items:center}
-.nav.active{color:#1e40af}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:50;align-items:flex-end}
-.modal.show{display:flex}
-.box{background:#fff;width:100%;border-radius:22px 22px 0 0;padding:18px;max-height:85vh;overflow:auto}
-input,select{width:100%;padding:13px;border:1px solid #e5e7eb;border-radius:12px;margin:7px 0;font-size:15px}
-.btn{width:100%;padding:14px;border:none;border-radius:12px;background:#1e40af;color:#fff;font-weight:700;cursor:pointer}
+.b{border-radius:14px;padding:12px;text-align:center}
+.b1{background:#ecfdf5}.b2{background:#fef2f2}.b3{background:#eff6ff}
+.circle{width:92px;height:92px;border-radius:50%;border:8px solid #e5e7eb;border-top-color:#10b981;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.fab{width:56px;height:56px;border-radius:18px;background:#1e40af;color:#fff;border:none;font-size:30px}
+.bot{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e5e7eb;display:flex;justify-content:space-around;padding:8px 0 10px}
+.ni{border:none;background:none;color:#9ca3af;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.ni.on{color:#1e40af}
+.m{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end;z-index:100}
+.m.on{display:flex}
+.mb{background:#fff;width:100%;border-radius:24px 24px 0 0;padding:20px;max-height:85vh;overflow:auto}
+input,select{width:100%;padding:14px;border:1px solid #e5e7eb;border-radius:12px;margin:8px 0}
+.btn{width:100%;padding:14px;background:#1e40af;color:#fff;border:none;border-radius:12px;font-weight:800}
 </style>
 </head>
 <body>
-<div class="header">
-<div style="font-weight:800;font-size:18px">🏠 مصروف البيت</div>
-<div style="display:flex;gap:8px"><span style="border:1px solid #e5e7eb;border-radius:8px;padding:4px 8px;font-size:13px">September 2026 📅</span></div>
+<div class="hdr"><div style="font-weight:900;font-size:19px">🏠 مصروف البيت</div><div style="display:flex;gap:8px;align-items:center"><button style="border:1px solid #e5e7eb;border-radius:20px;padding:6px 12px;background:#fff">English</button><span style="border:1px solid #e5e7eb;border-radius:10px;padding:6px 10px;font-size:12px">September 2026 📅</span></div></div>
+
+<div id="p-home">
+<div class="card"><div style="display:flex;justify-content:space-between"><b>الميزانية سبتمبر ٢٠٢٦</b><button style="border:1px solid #e5e7eb;border-radius:10px;padding:6px 10px;background:#fff;font-size:12px" onclick="show('settings')">✏️ تعديل الميزانية</button></div>
+<div class="grid3" style="margin-top:12px"><div class="b b1"><div style="font-size:11px;color:#6b7280">الميزانية</div><div id="vb" style="font-weight:900">500 د.أ</div></div><div class="b b2"><div style="font-size:11px;color:#6b7280">مصروف</div><div id="vs" style="font-weight:900">0 د.أ</div></div><div class="b b3"><div style="font-size:11px;color:#6b7280">الباقي</div><div id="vr" style="font-weight:900">500 د.أ</div></div></div>
+<div style="display:flex;align-items:center;gap:16px;margin-top:16px"><div style="flex:1"><div style="font-size:13px;color:#6b7280">قديش صرفت هذا الشهر؟</div><div id="vs2" style="font-weight:900;font-size:18px">0.00 د.أ</div><div id="vc" style="font-size:12px;color:#9ca3af">0 عمليات</div></div><div class="circle"><div id="vp" style="font-weight:900;font-size:22px">0%</div><div style="font-size:10px;color:#6b7280">من الميزانية</div></div></div></div>
+<div class="card" style="display:flex;justify-content:space-between;align-items:center"><div><b>🔥 أكثر الأقسام صرفاً</b><div id="topcat" style="font-size:12px;color:#9ca3af">لا يوجد بيانات</div></div><button class="fab" onclick="openAdd()">+</button></div>
+<div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:10px"><b>آخر العمليات</b><span style="color:#2563eb;font-size:12px">عرض الكل</span></div><div id="last">لا يوجد مصاريف بعد</div></div>
 </div>
 
-<div id="home">
-<div class="card">
-<div style="display:flex;justify-content:space-between;margin-bottom:12px"><b>الميزانية سبتمبر ٢٠٢٦</b><button style="border:1px solid #e5e7eb;border-radius:8px;padding:4px 10px;background:#fff;font-size:12px">✏️ تعديل</button></div>
-<div class="grid3">
-<div class="bbox bg-g"><div style="font-size:12px;color:#6b7280">الميزانية</div><div id="vB" style="font-weight:800;margin-top:4px">500.00 د.أ</div></div>
-<div class="bbox bg-r"><div style="font-size:12px;color:#6b7280">مصروف</div><div id="vS" style="font-weight:800;margin-top:4px">0.00 د.أ</div></div>
-<div class="bbox bg-b"><div style="font-size:12px;color:#6b7280">الباقي</div><div id="vR" style="font-weight:800;margin-top:4px">500.00 د.أ</div></div>
-</div>
-<div style="display:flex;gap:14px;align-items:center;margin-top:16px">
-<div style="flex:1"><div style="font-size:13px;color:#6b7280">قديش صرفت؟</div><div id="vS2" style="font-weight:800">0.00 د.أ</div><div id="vC" style="font-size:12px;color:#9ca3af">0 عمليات</div></div>
-<div class="circle"><div id="vP" style="font-weight:800">0%</div><div style="font-size:10px;color:#6b7280">من الميزانية</div></div>
-</div>
+<div id="p-log" style="display:none;padding:12px"><div class="card"><h3>📋 السجل</h3><div id="loglist"></div></div></div>
+<div id="p-orders" style="display:none;padding:12px"><div class="card"><h3>🛒 الطلبات</h3><input id="ordName" placeholder="اسم الطلب"><input id="ordPrice" type="number" placeholder="السعر"><button class="btn" onclick="addOrd()">إضافة طلب</button><div id="ordList" style="margin-top:12px"></div></div></div>
+<div id="p-reports" style="display:none;padding:12px"><div class="card"><h3>📊 التقارير</h3><div id="rep"></div></div></div>
+<div id="p-settings" style="display:none;padding:12px">
+<div class="card"><h3>⚙️ الإعدادات</h3><label style="font-weight:700">💱 العملة الأساسية - 40 عملة جديدة</label><select id="cur"></select><p style="font-size:11px;color:#6b7280">غير العملة وكل الحسابات رح تتحدث تلقائياً</p>
+<label style="margin-top:12px;display:block;font-weight:700">الميزانية الشهرية</label><input id="budInp" type="number"><button class="btn" onclick="saveSet()" style="margin-top:10px">💾 حفظ كل الإعدادات</button></div>
+<div class="card" style="font-size:11px;color:#6b7280">الإصدار الكبير 2.0 - 40 عملة 🇯🇴🇺🇸🇸🇦🇦🇪🇪🇬🇪🇺🇬🇧</div>
 </div>
 
-<div class="card" style="display:flex;justify-content:space-between;align-items:center">
-<div><div style="font-weight:700">🔥 أكثر الأقسام صرفاً</div><div style="font-size:12px;color:#9ca3af">لا يوجد</div></div>
-<button class="fab" onclick="openAdd()">+</button>
-</div>
+<div class="m" id="mAdd" onclick="if(event.target==this)closeAdd()"><div class="mb"><h3>➕ إضافة مصروف جديد</h3><input id="aT" placeholder="شو اشتريت؟"><input id="aA" type="number" placeholder="المبلغ"><select id="aC"><option>🍔 أكل</option><option>🚗 مواصلات</option><option>🏠 بيت</option><option>🎮 ترفيه</option><option>🛒 تسوق</option><option>💊 صحة</option><option>📚 تعليم</option><option>أخرى</option></select><input id="aD" type="date"><button class="btn" onclick="saveE()">حفظ</button><button style="width:100%;padding:12px;margin-top:8px;border:1px solid #e5e7eb;border-radius:12px;background:#fff" onclick="closeAdd()">إلغاء</button></div></div>
 
-<div class="card"><div style="font-weight:700;margin-bottom:10px">آخر العمليات</div><div id="last">لا يوجد مصاريف - اضغط +</div></div>
-</div>
-
-<div id="settings" style="display:none;padding:14px">
-<h3>⚙️ الإعدادات</h3>
-<div class="card">
-<label style="font-weight:700">💱 العملة - كل عملات العالم (40 عملة)</label>
-<select id="curSel"></select>
-<p style="font-size:12px;color:#6b7280">اختار عملتك والكل بتغير تلقائي</p>
-<button class="btn" style="margin-top:10px" onclick="saveSet()">حفظ الإعدادات</button>
-</div>
-</div>
-
-<div class="modal" id="mAdd" onclick="if(event.target==this)closeAdd()">
-<div class="box">
-<h3>➕ إضافة مصروف</h3>
-<input id="tTitle" placeholder="شو اشتريت؟">
-<input id="tAmt" type="number" placeholder="المبلغ">
-<select id="tCat"><option>🍔 أكل</option><option>🚗 مواصلات</option><option>🏠 بيت</option><option>🎮 ترفيه</option><option>🛒 تسوق</option><option>💊 صحة</option><option>أخرى</option></select>
-<input id="tDate" type="date">
-<button class="btn" onclick="saveExp()">حفظ</button>
-<button style="width:100%;padding:12px;margin-top:8px;border:1px solid #e5e7eb;border-radius:12px;background:#fff" onclick="closeAdd()">إلغاء</button>
-</div>
-</div>
-
-<div class="bottom">
-<button class="nav active" id="nHome" onclick="showP('home')">🏠<span>الرئيسية</span></button>
-<button class="nav">📋<span>السجل</span></button>
-<button class="nav">🛒<span>الطلبات</span></button>
-<button class="nav">📊<span>التقارير</span></button>
-<button class="nav" id="nSet" onclick="showP('settings')">⚙️<span>الإعدادات</span></button>
+<div class="bot">
+<button class="ni on" id="n-home" onclick="show('home')">🏠<span>الرئيسية</span></button>
+<button class="ni" id="n-log" onclick="show('log')">📋<span>السجل</span></button>
+<button class="ni" id="n-orders" onclick="show('orders')">🛒<span>الطلبات</span></button>
+<button class="ni" id="n-reports" onclick="show('reports')">📊<span>التقارير</span></button>
+<button class="ni" id="n-settings" onclick="show('settings')">⚙️<span>الإعدادات</span></button>
 </div>
 
 <script>
-const CURS=[
-{code:'JOD',s:'د.أ',n:'دينار أردني - JOD',f:'🇯🇴'},
-{code:'USD',s:'$',n:'دولار أمريكي - USD',f:'🇺🇸'},
-{code:'EUR',s:'€',n:'يورو - EUR',f:'🇪🇺'},
-{code:'GBP',s:'£',n:'جنيه إسترليني - GBP',f:'🇬🇧'},
-{code:'SAR',s:'ر.س',n:'ريال سعودي - SAR',f:'🇸🇦'},
-{code:'AED',s:'د.إ',n:'درهم إماراتي - AED',f:'🇦🇪'},
-{code:'QAR',s:'ر.ق',n:'ريال قطري - QAR',f:'🇶🇦'},
-{code:'KWD',s:'د.ك',n:'دينار كويتي - KWD',f:'🇰🇼'},
-{code:'BHD',s:'د.ب',n:'دينار بحريني - BHD',f:'🇧🇭'},
-{code:'OMR',s:'ر.ع',n:'ريال عماني - OMR',f:'🇴🇲'},
-{code:'EGP',s:'ج.م',n:'جنيه مصري - EGP',f:'🇪🇬'},
-{code:'LBP',s:'ل.ل',n:'ليرة لبنانية - LBP',f:'🇱🇧'},
-{code:'SYP',s:'ل.س',n:'ليرة سورية - SYP',f:'🇸🇾'},
-{code:'IQD',s:'ع.د',n:'دينار عراقي - IQD',f:'🇮🇶'},
-{code:'YER',s:'ر.ي',n:'ريال يمني - YER',f:'🇾🇪'},
-{code:'TRY',s:'₺',n:'ليرة تركية - TRY',f:'🇹🇷'},
-{code:'MAD',s:'د.م',n:'درهم مغربي - MAD',f:'🇲🇦'},
-{code:'DZD',s:'د.ج',n:'دينار جزائري - DZD',f:'🇩🇿'},
-{code:'TND',s:'د.ت',n:'دينار تونسي - TND',f:'🇹🇳'},
-{code:'LYD',s:'د.ل',n:'دينار ليبي - LYD',f:'🇱🇾'},
-{code:'SDG',s:'ج.س',n:'جنيه سوداني - SDG',f:'🇸🇩'},
-{code:'CAD',s:'C$',n:'دولار كندي - CAD',f:'🇨🇦'},
-{code:'AUD',s:'A$',n:'دولار أسترالي - AUD',f:'🇦🇺'},
-{code:'JPY',s:'¥',n:'ين ياباني - JPY',f:'🇯🇵'},
-{code:'CNY',s:'¥',n:'يوان صيني - CNY',f:'🇨🇳'},
-{code:'INR',s:'₹',n:'روبية هندية - INR',f:'🇮🇳'},
-{code:'PKR',s:'₨',n:'روبية باكستانية - PKR',f:'🇵🇰'},
-{code:'BRL',s:'R$',n:'ريال برازيلي - BRL',f:'🇧🇷'},
-{code:'RUB',s:'₽',n:'روبل روسي - RUB',f:'🇷🇺'},
-{code:'ZAR',s:'R',n:'راند جنوب أفريقي - ZAR',f:'🇿🇦'},
-{code:'CHF',s:'Fr',n:'فرنك سويسري - CHF',f:'🇨🇭'},
-{code:'SEK',s:'kr',n:'كرونة سويدية - SEK',f:'🇸🇪'},
-{code:'NOK',s:'kr',n:'كرونة نرويجية - NOK',f:'🇳🇴'},
-{code:'DKK',s:'kr',n:'كرونة دنماركية - DKK',f:'🇩🇰'},
-{code:'SGD',s:'S$',n:'دولار سنغافوري - SGD',f:'🇸🇬'},
-{code:'MYR',s:'RM',n:'رينغيت ماليزي - MYR',f:'🇲🇾'},
-{code:'IDR',s:'Rp',n:'روبية إندونيسية - IDR',f:'🇮🇩'},
-{code:'THB',s:'฿',n:'بات تايلاندي - THB',f:'🇹🇭'},
-{code:'KRW',s:'₩',n:'وون كوري - KRW',f:'🇰🇷'},
-{code:'NGN',s:'₦',n:'نايرا نيجيرية - NGN',f:'🇳🇬'}
-];
-let db=JSON.parse(localStorage.getItem('masroof_db')||'null')||{expenses:[],budget:500,settings:{currency:'JOD'}};
-function cur(){return CURS.find(c=>c.code===db.settings.currency)||CURS[0]}
+const CURS=[{c:'JOD',s:'د.أ',n:'دينار أردني - JOD',f:'🇯🇴'},{c:'USD',s:'$',n:'دولار أمريكي - USD',f:'🇺🇸'},{c:'EUR',s:'€',n:'يورو - EUR',f:'🇪🇺'},{c:'GBP',s:'£',n:'جنيه إسترليني - GBP',f:'🇬🇧'},{c:'SAR',s:'ر.س',n:'ريال سعودي - SAR',f:'🇸🇦'},{c:'AED',s:'د.إ',n:'درهم إماراتي - AED',f:'🇦🇪'},{c:'QAR',s:'ر.ق',n:'ريال قطري - QAR',f:'🇶🇦'},{c:'KWD',s:'د.ك',n:'دينار كويتي - KWD',f:'🇰🇼'},{c:'BHD',s:'د.ب',n:'دينار بحريني - BHD',f:'🇧🇭'},{c:'OMR',s:'ر.ع',n:'ريال عماني - OMR',f:'🇴🇲'},{c:'EGP',s:'ج.م',n:'جنيه مصري - EGP',f:'🇪🇬'},{c:'LBP',s:'ل.ل',n:'ليرة لبنانية - LBP',f:'🇱🇧'},{c:'SYP',s:'ل.س',n:'ليرة سورية - SYP',f:'🇸🇾'},{c:'IQD',s:'ع.د',n:'دينار عراقي - IQD',f:'🇮🇶'},{c:'YER',s:'ر.ي',n:'ريال يمني - YER',f:'🇾🇪'},{c:'TRY',s:'₺',n:'ليرة تركية - TRY',f:'🇹🇷'},{c:'MAD',s:'د.م',n:'درهم مغربي - MAD',f:'🇲🇦'},{c:'DZD',s:'د.ج',n:'دينار جزائري - DZD',f:'🇩🇿'},{c:'TND',s:'د.ت',n:'دينار تونسي - TND',f:'🇹🇳'},{c:'LYD',s:'د.ل',n:'دينار ليبي - LYD',f:'🇱🇾'},{c:'SDG',s:'ج.س',n:'جنيه سوداني - SDG',f:'🇸🇩'},{c:'CAD',s:'C$',n:'دولار كندي - CAD',f:'🇨🇦'},{c:'AUD',s:'A$',n:'دولار أسترالي - AUD',f:'🇦🇺'},{c:'JPY',s:'¥',n:'ين ياباني - JPY',f:'🇯🇵'},{c:'CNY',s:'¥',n:'يوان صيني - CNY',f:'🇨🇳'},{c:'INR',s:'₹',n:'روبية هندية - INR',f:'🇮🇳'},{c:'PKR',s:'₨',n:'روبية باكستانية - PKR',f:'🇵🇰'},{c:'BRL',s:'R$',n:'ريال برازيلي - BRL',f:'🇧🇷'},{c:'RUB',s:'₽',n:'روبل روسي - RUB',f:'🇷🇺'},{c:'ZAR',s:'R',n:'راند جنوب أفريقي - ZAR',f:'🇿🇦'},{c:'CHF',s:'Fr',n:'فرنك سويسري - CHF',f:'🇨🇭'},{c:'SEK',s:'kr',n:'كرونة سويدية - SEK',f:'🇸🇪'},{c:'NOK',s:'kr',n:'كرونة نرويجية - NOK',f:'🇳🇴'},{c:'DKK',s:'kr',n:'كرونة دنماركية - DKK',f:'🇩🇰'},{c:'SGD',s:'S$',n:'دولار سنغافوري - SGD',f:'🇸🇬'},{c:'MYR',s:'RM',n:'رينغيت ماليزي - MYR',f:'🇲🇾'},{c:'IDR',s:'Rp',n:'روبية إندونيسية - IDR',f:'🇮🇩'},{c:'THB',s:'฿',n:'بات تايلاندي - THB',f:'🇹🇭'},{c:'KRW',s:'₩',n:'وون كوري - KRW',f:'🇰🇷'},{c:'NGN',s:'₦',n:'نايرا نيجيرية - NGN',f:'🇳🇬'}];
+let db=JSON.parse(localStorage.getItem('big_db')||'null')||{ex:[],ord:[],budget:500,cur:'JOD'};
+function gC(){return CURS.find(x=>x.c===db.cur)||CURS[0]}
 function init(){
-let sel=document.getElementById('curSel');
-CURS.forEach(c=>{
-let o=document.createElement('option');o.value=c.code;o.textContent=c.f+' '+c.n+' ('+c.s+')';
-if(c.code===db.settings.currency)o.selected=true;sel.appendChild(o);
-});
-document.getElementById('tDate').value=new Date().toISOString().slice(0,10);
+let s=document.getElementById('cur');CURS.forEach(x=>{let o=document.createElement('option');o.value=x.c;o.textContent=x.f+' '+x.n+' ('+x.s+')';if(x.c===db.cur)o.selected=true;s.appendChild(o)});
+document.getElementById('aD').value=new Date().toISOString().slice(0,10);
+document.getElementById('budInp').value=db.budget;
 render();
 }
 function render(){
-let c=cur();let tot=db.expenses.reduce((s,e)=>s+e.amount,0);let rem=db.budget-tot;let pct=db.budget?Math.round(tot/db.budget*100):0;
-document.getElementById('vB').textContent=db.budget.toFixed(2)+' '+c.s;
-document.getElementById('vS').textContent=tot.toFixed(2)+' '+c.s;
-document.getElementById('vS2').textContent=tot.toFixed(2)+' '+c.s;
-document.getElementById('vR').textContent=rem.toFixed(2)+' '+c.s;
-document.getElementById('vC').textContent=db.expenses.length+' عمليات';
-document.getElementById('vP').textContent=pct+'%';
-let l=document.getElementById('last');
-if(!db.expenses.length)l.textContent='لا يوجد مصاريف بعد - اضغط +';
-else l.innerHTML=db.expenses.slice(0,5).map(e=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f3f4f6"><span>${e.title}</span><span>${e.amount} ${c.s}</span></div>`).join('');
+let c=gC();let tot=db.ex.reduce((a,b)=>a+b.a,0);let rem=db.budget-tot;let pct=db.budget?Math.round(tot/db.budget*100):0;
+document.getElementById('vb').textContent=db.budget.toFixed(2)+' '+c.s;
+document.getElementById('vs').textContent=tot.toFixed(2)+' '+c.s;
+document.getElementById('vs2').textContent=tot.toFixed(2)+' '+c.s;
+document.getElementById('vr').textContent=rem.toFixed(2)+' '+c.s;
+document.getElementById('vc').textContent=db.ex.length+' عمليات';
+document.getElementById('vp').textContent=pct+'%';
+document.getElementById('last').innerHTML=db.ex.length?db.ex.slice(0,5).map(e=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f3f4f6"><span>${e.t} <small style="color:#9ca3af">${e.cat}</small></span><span>${e.a} ${c.s}</span></div>`).join(''):'لا يوجد مصاريف بعد';
+document.getElementById('loglist').innerHTML=db.ex.length?db.ex.map(e=>`<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #eee"><div><b>${e.t}</b><div style="font-size:11px;color:#9ca3af">${e.d} - ${e.cat}</div></div><b>${e.a} ${c.s}</b></div>`).join(''):'لا يوجد';
+document.getElementById('ordList').innerHTML=db.ord.map((o,i)=>`<div style="display:flex;justify-content:space-between;padding:8px;background:#f9fafb;border-radius:10px;margin:6px 0"><span>${o.n}</span><span>${o.p} ${c.s}</span></div>`).join('');
+let cats={};db.ex.forEach(e=>{cats[e.cat]=(cats[e.cat]||0)+e.a});
+document.getElementById('topcat').textContent=Object.keys(cats).length?Object.entries(cats).sort((a,b)=>b[1]-a[1])[0][0]+' - '+Object.entries(cats).sort((a,b)=>b[1]-a[1])[0][1]+' '+c.s:'لا يوجد';
+document.getElementById('rep').innerHTML=`<div>إجمالي المصروف: <b>${tot} ${c.s}</b></div><div>الباقي: <b>${rem} ${c.s}</b></div><div>عدد العمليات: <b>${db.ex.length}</b></div><div style="margin-top:10px">${Object.entries(cats).map(([k,v])=>`<div style="display:flex;justify-content:space-between"><span>${k}</span><span>${v} ${c.s}</span></div>`).join('')}</div>`;
 }
-function showP(p){
-document.getElementById('home').style.display=p==='home'?'block':'none';
-document.getElementById('settings').style.display=p==='settings'?'block':'none';
-document.getElementById('nHome').classList.toggle('active',p==='home');
-document.getElementById('nSet').classList.toggle('active',p==='settings');
-}
-function openAdd(){document.getElementById('mAdd').classList.add('show')}
-function closeAdd(){document.getElementById('mAdd').classList.remove('show')}
-function saveExp(){
-let t=document.getElementById('tTitle').value.trim();let a=parseFloat(document.getElementById('tAmt').value);
-if(!t||!a)return alert('اكتب الاسم والمبلغ');
-db.expenses.unshift({id:Date.now(),title:t,amount:a,date:document.getElementById('tDate').value});
-localStorage.setItem('masroof_db',JSON.stringify(db));closeAdd();render();
-document.getElementById('tTitle').value='';document.getElementById('tAmt').value='';
-}
-function saveSet(){
-db.settings.currency=document.getElementById('curSel').value;
-localStorage.setItem('masroof_db',JSON.stringify(db));
-alert('تم حفظ العملة: '+db.settings.currency+' ✅');render();
-}
+function show(p){['home','log','orders','reports','settings'].forEach(x=>document.getElementById('p-'+x).style.display=x===p?'block':'none');document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));document.getElementById('n-'+p).classList.add('on');render();}
+function openAdd(){document.getElementById('mAdd').classList.add('on')}
+function closeAdd(){document.getElementById('mAdd').classList.remove('on')}
+function saveE(){let t=document.getElementById('aT').value.trim();let a=parseFloat(document.getElementById('aA').value);let cat=document.getElementById('aC').value;let d=document.getElementById('aD').value;if(!t||!a)return alert('عبي البيانات');db.ex.unshift({t,a,cat,d});localStorage.setItem('big_db',JSON.stringify(db));closeAdd();render();document.getElementById('aT').value='';document.getElementById('aA').value='';}
+function addOrd(){let n=document.getElementById('ordName').value;let p=parseFloat(document.getElementById('ordPrice').value);if(!n||!p)return;db.ord.push({n,p});localStorage.setItem('big_db',JSON.stringify(db));render();document.getElementById('ordName').value='';document.getElementById('ordPrice').value='';}
+function saveSet(){db.cur=document.getElementById('cur').value;db.budget=parseFloat(document.getElementById('budInp').value)||500;localStorage.setItem('big_db',JSON.stringify(db));alert('تم الحفظ! العملة: '+db.cur+' ✅');render();}
 init();
 </script>
 </body>
