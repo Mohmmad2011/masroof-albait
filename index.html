@@ -95,8 +95,11 @@ function render(){
 }
 function showAll(){ document.getElementById('list').innerHTML=data.exp.map((e,i)=>`<div class="expense"><span>${e.n} <small style="color:var(--muted)">${e.d}</small></span><span>${e.p.toFixed(2)} <button onclick="data.exp.splice(${i},1);save()" style="background:none;border:none;color:var(--red)">✕</button></span></div>`).reverse().join(''); }
 document.getElementById('editBudget').onclick=()=>document.getElementById('salary').focus();
+function updateClock(){const now=new Date();const days=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];const dayName=days[now.getDay()];const dateMiladi=now.toLocaleDateString('ar-JO',{day:'numeric',month:'long',year:'numeric'});const time=now.toLocaleTimeString('ar-JO',{hour:'2-digit',minute:'2-digit',second:'2-digit'});let hijri='';try{hijri=new Intl.DateTimeFormat('ar-SA-islamic',{day:'numeric',month:'long',year:'numeric'}).format(now)}catch(e){}const el=document.getElementById('liveDate');if(el)el.innerHTML=`📅 ${dayName} • ${dateMiladi}<br>🕐 ${time} ${hijri?' • 🕌 '+hijri:''}`;}setInterval(updateClock,1000);updateClock();
 render();
 if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 </script>
+</body>
+</html>
 </body>
 </html>
