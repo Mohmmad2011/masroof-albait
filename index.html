@@ -4,52 +4,74 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>مصروفات المنزل</title><link rel="manifest" href="manifest.json">
 <style>
-:root{--bg:#f3f4f6;--card:#fff;--text:#111827;--muted:#6b7280;--green:#0f6d38;--green-light:#e6f4ea;--red:#ef4444;--red-light:#fef2f2;--blue:#3b82f6;--blue-light:#eff6ff;--border:#e5e7eb}
-[data-theme="dark"]{--bg:#0f0f0f;--card:#1e1e1e;--text:#f0f0f0;--muted:#9ca3af;--green:#22c55e;--green-light:#132a1a;--red:#f87171;--red-light:#2a1515;--blue:#60a5fa;--blue-light:#162032;--border:#2a2a2a}
+:root{--bg:#f3f4f6;--card:#fff;--text:#111827;--muted:#6b7280;--green:#0f6d38;--greenL:#e6f4ea;--red:#ef4444;--blue:#3b82f6;--border:#e5e7eb;--blueL:#eff6ff;--redL:#fef2f2}
+[data-theme="dark"]{--bg:#0f0f0f;--card:#1e1e1e;--text:#f0f0f0;--muted:#9ca3af;--green:#22c55e;--greenL:#132a1a;--red:#f87171;--blue:#60a5fa;--border:#2a2a2a;--blueL:#162032;--redL:#2a1515}
 *{box-sizing:border-box;font-family:Tajawal,system-ui}body{margin:0;background:var(--bg);color:var(--text);padding-bottom:90px}
-header{background:var(--green);color:#fff;padding:16px;display:flex;flex-direction:column;gap:8px;position:sticky;top:0;z-index:10}
-.container{max-width:600px;margin:0 auto;padding:16px}
-.card{background:var(--card);border-radius:20px;padding:16px;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,.05);border:1px solid var(--border)}
-.top3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
-.box{border-radius:16px;padding:14px;text-align:center}.box small{display:block;color:var(--muted);font-size:13px}.box b{font-size:17px}
-.box.green{background:var(--green-light);color:var(--green)}.box.red{background:var(--red-light);color:var(--red)}.box.blue{background:var(--blue-light);color:var(--blue)}
-.circle{width:90px;height:90px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--green) 0%, var(--border) 0%)}
-.circle span{background:var(--card);width:72px;height:72px;border-radius:50%;display:grid;place-items:center;text-align:center}
-.input,select{width:100%;padding:12px;border:1px solid var(--border);border-radius:12px;background:var(--card);color:var(--text)}
-.btn{background:var(--green);color:#fff;border:none;padding:12px;border-radius:12px;width:100%;font-weight:bold;cursor:pointer}
-.expense{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);align-items:center;cursor:pointer}
+header{background:var(--green);color:#fff;padding:14px;position:sticky;top:0;z-index:20}
+.container{max-width:650px;margin:0 auto;padding:14px}
+.card{background:var(--card);border-radius:20px;padding:16px;margin-bottom:12px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.top3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.box{border-radius:16px;padding:12px;text-align:center}.box small{color:var(--muted);font-size:12px;display:block}.box b{font-size:16px}
+.box.green{background:var(--greenL);color:var(--green)}.box.red{background:var(--redL);color:var(--red)}.box.blue{background:var(--blueL);color:var(--blue)}
+.circle{width:100px;height:100px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--green) 0%, var(--border) 0%)}.circle span{background:var(--card);width:78px;height:78px;border-radius:50%;display:grid;place-items:center}
+.input,select{width:100%;padding:11px;border:1px solid var(--border);border-radius:12px;background:var(--card);color:var(--text)}
+.btn{background:var(--green);color:#fff;border:none;padding:12px;border-radius:12px;font-weight:bold;cursor:pointer;width:100%}
+.expense{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);cursor:pointer}
+.badge{padding:4px 8px;border-radius:8px;font-size:11px;background:var(--bg)}
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0;z-index:20}
-.nav-item{cursor:pointer;text-align:center;flex:1;padding:4px;font-size:12px}.nav-item.active{color:var(--green);font-weight:bold}
+.nav-item{flex:1;text-align:center;font-size:12px;cursor:pointer}.nav-item.active{color:var(--green);font-weight:bold}
 .page{display:none}.page.active{display:block}
-.fab{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:#0f5c9a;color:#fff;width:60px;height:60px;border-radius:18px;border:none;font-size:30px;z-index:15}
+.fab{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:#0f5c9a;color:#fff;width:60px;height:60px;border-radius:18px;border:none;font-size:28px;z-index:15}
+.bar{height:8px;background:var(--border);border-radius:10px;overflow:hidden;margin-top:6px}.bar div{height:100%;background:var(--green)}
 </style>
 </head>
 <body>
 <header>
-<div style="width:100%;display:flex;justify-content:space-between;align-items:center">
-<h1 style="margin:0;font-size:18px" data-t="title">🏠 مصروفات المنزل</h1>
-<div style="display:flex;gap:6px;align-items:center">
-<select id="langSel" style="width:auto;background:rgba(255,255,255,.2);color:#fff;border:none;padding:6px 8px;border-radius:8px">
-<option value="ar">العربية</option><option value="en">English</option><option value="fr">Français</option><option value="tr">Türkçe</option><option value="ur">اردو</option>
-</select>
-<button id="themeToggle" style="background:rgba(255,255,255,.2);border:none;color:#fff;width:40px;height:40px;border-radius:50%">🌙</button>
+<div style="display:flex;justify-content:space-between;align-items:center">
+<h1 style="margin:0;font-size:18px" id="appName">🏠 مصروفات المنزل</h1>
+<div style="display:flex;gap:6px">
+<select id="langSel" style="width:auto;background:rgba(255,255,255,.2);color:#fff;border:none;padding:6px;border-radius:8px"><option value="ar">العربية</option><option value="en">English</option></select>
+<button id="themeBtn" style="background:rgba(255,255,255,.2);border:none;color:#fff;width:36px;height:36px;border-radius:50%">🌙</button>
 </div>
 </div>
-<div id="liveDate" style="width:100%;text-align:center;background:rgba(255,255,255,.15);padding:8px;border-radius:12px;font-size:13px;line-height:1.6"></div>
+<div id="liveDate" style="margin-top:8px;text-align:center;background:rgba(255,255,255,.15);padding:8px;border-radius:12px;font-size:12px;line-height:1.6"></div>
 </header>
 
 <div class="container">
 <div id="page-home" class="page active">
-<div class="card" style="display:flex;justify-content:space-between"><span data-t="budget">📅 الميزانية</span><span id="monthName"></span></div>
-<div class="top3"><div class="box blue"><small data-t="left">الباقي</small><b id="leftTxt">0.00</b></div><div class="box red"><small data-t="spent">مصروف</small><b id="spentTxt">0.00</b></div><div class="box green"><small data-t="budget2">الميزانية</small><b id="budgetTxt">0.00</b></div></div>
-<div class="card"><div style="display:flex;align-items:center;gap:20px;justify-content:space-between"><div><div style="color:var(--muted)" data-t="howMuch">قديش صرفت؟</div><b id="spentBig" style="font-size:22px">0.00</b><div><small id="countTxt">0</small></div></div><div class="circle" id="circle"><span><b id="percentTxt">0%</b></span></div></div><div style="display:flex;gap:8px;margin-top:12px"><input id="salary" class="input" type="number"><button class="btn" style="width:auto" onclick="saveBudget()" data-t="save">حفظ</button></div></div>
-<div class="card"><b data-t="lastExp">📋 آخر المصروفات - اضغط للتعديل</b><div id="list" style="margin-top:10px"></div><div style="display:flex;gap:10px;margin-top:14px"><input id="eName" class="input" placeholder="الاسم"><input id="ePrice" class="input" type="number" placeholder="السعر"><button class="btn" style="width:auto" onclick="addExpense()">+</button></div></div>
+<div class="card" style="display:flex;justify-content:space-between"><b><span data-t="budget">الميزانية</span> - <span id="monthName"></span></b><span id="curShow" style="color:var(--green)"></span></div>
+<div class="top3"><div class="box blue"><small data-t="left">الباقي</small><b id="leftTxt">0</b></div><div class="box red"><small data-t="spent">مصروف</small><b id="spentTxt">0</b></div><div class="box green"><small data-t="budget2">الميزانية</small><b id="budgetTxt">0</b></div></div>
+<div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><div><small style="color:var(--muted)" data-t="howMuch">قديش صرفت هذا الشهر؟</small><br><b id="spentBig" style="font-size:22px">0</b><br><small id="countTxt"></small></div><div class="circle" id="circle"><span><b id="percentTxt">0%</b></span></div></div><div style="display:flex;gap:6px;margin-top:10px"><input id="salary" class="input" type="number" placeholder="الميزانية"><button class="btn" style="width:90px" onclick="saveBudget()" data-t="save">حفظ</button></div></div>
+<div class="card"><b data-t="topCats">🔥 أكثر الأقسام صرفاً</b><div id="topCats"></div></div>
+<div class="card"><div style="display:flex;justify-content:space-between"><b data-t="lastExp">📋 آخر المصروفات</b><small style="color:var(--green);cursor:pointer" onclick="switchTab('log')" data-t="viewAll">عرض الكل</small></div><div id="list"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:10px"><select id="eCat" class="input"></select><input id="eName" class="input" placeholder="الاسم"><input id="ePrice" class="input" type="number" placeholder="السعر"></div><button class="btn" style="margin-top:8px" onclick="addExpense()" data-t="add">+ إضافة</button></div>
 </div>
 
-<div id="page-log" class="page"><div class="card"><h3 data-t="logTitle">📄 السجل</h3><div id="logList"></div><button class="btn" style="margin-top:10px;background:var(--red)" onclick="clearAll()" data-t="clear">مسح الكل</button></div></div>
-<div id="page-orders" class="page"><div class="card"><h3 data-t="ordersTitle">🛒 الطلبيات</h3><div style="display:flex;gap:8px"><input id="oName" class="input" placeholder="الطلب"><input id="oPrice" class="input" type="number"><button class="btn" style="width:auto" onclick="addOrder()">+</button></div><div id="ordersList" style="margin-top:12px"></div></div></div>
-<div id="page-reports" class="page"><div class="card"><h3 data-t="reportsTitle">📊 التقارير</h3><div id="reportsBox"></div><div id="topCats" style="margin-top:10px"></div></div></div>
-<div id="page-settings" class="page"><div class="card"><h3 data-t="settingsTitle">⚙️ الإعدادات</h3><label data-t="langLabel">اللغة</label><select id="langSel2" class="input" style="margin:8px 0"><option value="ar">العربية</option><option value="en">English</option><option value="fr">Français</option><option value="tr">Türkçe</option><option value="ur">اردو</option></select><p data-t="settingsDesc" style="color:var(--muted)">غيّر اللغة والوضع الليلي.</p><button class="btn" style="background:#ef4444;margin-top:10px" onclick="if(confirm('مسح؟')){localStorage.clear();location.reload()}" data-t="deleteAll">مسح كل البيانات</button></div></div>
+<div id="page-log" class="page"><div class="card"><h3 data-t="logTitle">📄 السجل - اضغط للتعديل</h3><select id="filterCat" class="input" style="margin-bottom:8px"></select><div id="logList"></div><button class="btn" style="margin-top:10px;background:var(--red)" onclick="clearAll()" data-t="clearAll">مسح الكل</button></div>
+<div class="card"><h4 data-t="catsTitle">🗂️ الأقسام</h4><div style="display:flex;gap:6px"><input id="newCat" class="input" placeholder="قسم جديد مثل: سيارة"><button class="btn" style="width:80px" onclick="addCat()">+</button></div><div id="catsList" style="margin-top:8px"></div></div>
+</div>
+
+<div id="page-orders" class="page"><div class="card"><h3 data-t="ordersTitle">🛒 الطلبيات</h3><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px"><input id="oName" class="input" placeholder="شو طلبت"><input id="oPrice" class="input" type="number" placeholder="السعر"></div><button class="btn" style="margin-top:8px" onclick="addOrder()" data-t="addOrder">إضافة طلب</button><div id="ordersList" style="margin-top:10px"></div></div></div>
+
+<div id="page-reports" class="page">
+<div class="card"><h3 data-t="reportsTitle">📊 التقارير</h3><div id="reportsBox"></div></div>
+<div class="card"><b data-t="byCat">حسب الأقسام</b><div id="reportByCat"></div></div>
+<div class="card"><b data-t="byDay">حسب الأيام (آخر 7 أيام)</b><div id="reportByDay"></div></div>
+<div class="card"><b data-t="compare">مقارنة الشهر</b><div id="reportCompare"></div></div>
+</div>
+
+<div id="page-settings" class="page">
+<div class="card"><h3 data-t="settingsTitle">⚙️ الإعدادات</h3>
+<label data-t="currency">العملة (40 عملة)</label>
+<select id="curSel" class="input" style="margin:8px 0"></select>
+<label data-t="language">اللغة</label>
+<select id="langSel2" class="input" style="margin:8px 0"><option value="ar">العربية</option><option value="en">English</option></select>
+<label data-t="appNameLabel">اسم التطبيق</label>
+<input id="appNameInput" class="input" placeholder="مصروفات المنزل" style="margin:8px 0">
+<button class="btn" onclick="saveAppName()" data-t="saveName">حفظ الاسم</button>
+<hr style="margin:14px 0;border:none;border-top:1px solid var(--border)">
+<button class="btn" style="background:var(--red)" onclick="if(confirm('مسح؟')){localStorage.clear();location.reload()}" data-t="deleteAll">مسح كل البيانات</button>
+</div></div>
 </div>
 
 <div class="bottom-nav">
@@ -61,27 +83,47 @@ header{background:var(--green);color:#fff;padding:16px;display:flex;flex-directi
 </div>
 
 <script>
-const trans={ar:{title:"🏠 مصروفات المنزل",budget:"📅 الميزانية",left:"الباقي",spent:"مصروف",budget2:"الميزانية",howMuch:"قديش صرفت؟",save:"حفظ",lastExp:"📋 آخر المصروفات - اضغط للتعديل",logTitle:"📄 السجل الكامل",clear:"مسح الكل",ordersTitle:"🛒 الطلبيات / الديون",reportsTitle:"📊 التقارير",settingsTitle:"⚙️ الإعدادات",langLabel:"اللغة",settingsDesc:"اختر اللغة من فوق، والوضع الليلي من زر القمر.",deleteAll:"مسح كل البيانات",navHome:"الرئيسية",navLog:"السجل",navOrders:"الطلبيات",navReports:"التقارير",navSettings:"الإعدادات"},en:{title:"🏠 Home Expenses",budget:"📅 Budget",left:"Left",spent:"Spent",budget2:"Budget",howMuch:"How much spent?",save:"Save",lastExp:"📋 Last Expenses - tap to edit",logTitle:"📄 Full Log",clear:"Clear All",ordersTitle:"🛒 Orders / Debts",reportsTitle:"📊 Reports",settingsTitle:"⚙️ Settings",langLabel:"Language",settingsDesc:"Choose language and dark mode.",deleteAll:"Delete All Data",navHome:"Home",navLog:"Log",navOrders:"Orders",navReports:"Reports",navSettings:"Settings"},fr:{title:"🏠 Dépenses",budget:"📅 Budget",left:"Reste",spent:"Dépensé",budget2:"Budget",howMuch:"Combien dépensé?",save:"Sauver",lastExp:"📋 Dernières - tap pour modifier",logTitle:"📄 Journal",clear:"Effacer",ordersTitle:"🛒 Commandes",reportsTitle:"📊 Rapports",settingsTitle:"⚙️ Paramètres",langLabel:"Langue",settingsDesc:"Choisissez la langue.",deleteAll:"Supprimer tout",navHome:"Accueil",navLog:"Journal",navOrders:"Commandes",navReports:"Rapports",navSettings:"Paramètres"},tr:{title:"🏠 Ev Giderleri",budget:"📅 Bütçe",left:"Kalan",spent:"Harcanan",budget2:"Bütçe",howMuch:"Ne kadar?",save:"Kaydet",lastExp:"📋 Son Giderler",logTitle:"📄 Kayıtlar",clear:"Temizle",ordersTitle:"🛒 Siparişler",reportsTitle:"📊 Raporlar",settingsTitle:"⚙️ Ayarlar",langLabel:"Dil",settingsDesc:"Dili seçin.",deleteAll:"Tümünü Sil",navHome:"Ana",navLog:"Kayıt",navOrders:"Sipariş",navReports:"Rapor",navSettings:"Ayar"},ur:{title:"🏠 گھر کے اخراجات",budget:"📅 بجٹ",left:"باقی",spent:"خرچ",budget2:"بجٹ",howMuch:"کتنا خرچ؟",save:"محفوظ",lastExp:"📋 آخری اخراجات",logTitle:"📄 ریکارڈ",clear:"صاف کریں",ordersTitle:"🛒 آرڈرز",reportsTitle:"📊 رپورٹس",settingsTitle:"⚙️ ترتیبات",langLabel:"زبان",settingsDesc:"زبان منتخب کریں۔",deleteAll:"سب ڈیلیٹ",navHome:"ہوم",navLog:"لاگ",navOrders:"آرڈرز",navReports:"رپورٹس",navSettings:"سیٹنگز"}};
+const currencies={JOD:{s:'د.أ',n:'دينار أردني'},SAR:{s:'ر.س',n:'ريال سعودي'},USD:{s:'$',n:'US Dollar'},EUR:{s:'€',n:'Euro'},TRY:{s:'₺',n:'Turkish Lira'},EGP:{s:'ج.م',n:'Egyptian Pound'},AED:{s:'د.إ',n:'UAE Dirham'},KWD:{s:'د.ك',n:'Kuwaiti Dinar'},IQD:{s:'ع.د',n:'Iraqi Dinar'},SYP:{s:'ل.س',n:'Syrian Lira'},QAR:{s:'ر.ق',n:'Qatari Rial'},BHD:{s:'د.ب',n:'Bahraini Dinar'},OMR:{s:'ر.ع',n:'Omani Rial'},YER:{s:'ر.ي',n:'Yemeni Rial'},LBP:{s:'ل.ل',n:'Lebanese Lira'},MAD:{s:'د.م',n:'Moroccan Dirham'},TND:{s:'د.ت',n:'Tunisian Dinar'},DZD:{s:'د.ج',n:'Algerian Dinar'},SDG:{s:'ج.س',n:'Sudanese Pound'},LYD:{s:'د.ل',n:'Libyan Dinar'},GBP:{s:'£',n:'British Pound'},CAD:{s:'C$',n:'Canadian Dollar'},AUD:{s:'A$',n:'Australian Dollar'},JPY:{s:'¥',n:'Japanese Yen'},CNY:{s:'¥',n:'Chinese Yuan'},INR:{s:'₹',n:'Indian Rupee'},PKR:{s:'₨',n:'Pakistani Rupee'},BDT:{s:'৳',n:'Bangladeshi Taka'},IDR:{s:'Rp',n:'Indonesian Rupiah'},MYR:{s:'RM',n:'Malaysian Ringgit'},PHP:{s:'₱',n:'Philippine Peso'},THB:{s:'฿',n:'Thai Baht'},KRW:{s:'₩',n:'Korean Won'},RUB:{s:'₽',n:'Russian Ruble'},SEK:{s:'kr',n:'Swedish Krona'},NOK:{s:'kr',n:'Norwegian Krone'},DKK:{s:'kr',n:'Danish Krone'},CHF:{s:'Fr',n:'Swiss Franc'},ZAR:{s:'R',n:'South African Rand'},NGN:{s:'₦',n:'Nigerian Naira'}};
+const trans={ar:{budget:"📅 الميزانية",left:"الباقي",spent:"مصروف",budget2:"الميزانية",howMuch:"قديش صرفت هذا الشهر؟",save:"حفظ",topCats:"🔥 أكثر الأقسام صرفاً",lastExp:"📋 آخر المصروفات",viewAll:"عرض الكل",add:"+ إضافة",logTitle:"📄 السجل - اضغط للتعديل",catsTitle:"🗂️ الأقسام",clearAll:"مسح الكل",ordersTitle:"🛒 الطلبيات - شو طلبت",addOrder:"إضافة طلب",reportsTitle:"📊 التقارير",byCat:"حسب الأقسام",byDay:"حسب الأيام (آخر 7 أيام)",compare:"مقارنة الشهر",settingsTitle:"⚙️ الإعدادات",currency:"العملة (40 عملة)",language:"اللغة",appNameLabel:"اسم التطبيق",saveName:"حفظ الاسم",deleteAll:"مسح كل البيانات",navHome:"الرئيسية",navLog:"السجل",navOrders:"الطلبيات",navReports:"التقارير",navSettings:"الإعدادات"},en:{budget:"📅 Budget",left:"Left",spent:"Spent",budget2:"Budget",howMuch:"How much this month?",save:"Save",topCats:"🔥 Top Categories",lastExp:"📋 Last Expenses",viewAll:"View All",add:"+ Add",logTitle:"📄 Log - tap to edit",catsTitle:"🗂️ Categories",clearAll:"Clear All",ordersTitle:"🛒 Orders",addOrder:"Add Order",reportsTitle:"📊 Reports",byCat:"By Categories",byDay:"By Days (last 7)",compare:"Month Comparison",settingsTitle:"⚙️ Settings",currency:"Currency (40)",language:"Language",appNameLabel:"App Name",saveName:"Save Name",deleteAll:"Delete All",navHome:"Home",navLog:"Log",navOrders:"Orders",navReports:"Reports",navSettings:"Settings"}};
 let curLang=localStorage.getItem('appLang')||'ar';
-function applyLang(l){curLang=l;localStorage.setItem('appLang',l);let t=trans[l]||trans.ar;document.querySelectorAll('[data-t]').forEach(el=>{let k=el.getAttribute('data-t');if(t[k])el.textContent=t[k];});document.documentElement.dir=(l==='ar'||l==='ur')?'rtl':'ltr';document.documentElement.lang=l;document.getElementById('langSel').value=l;document.getElementById('langSel2').value=l;}
-document.getElementById('langSel').onchange=e=>applyLang(e.target.value);document.getElementById('langSel2').onchange=e=>applyLang(e.target.value);
+let data=JSON.parse(localStorage.getItem('home_exp_v2')||'{"budget":0,"exp":[],"orders":[],"cur":"JOD","cats":["سوبرماركت","ايجار","سيارة","كهرباء","ماء","انترنت","مطاعم","صحة"],"appName":"🏠 مصروفات المنزل"}');
+if(!data.cats)data.cats=["سوبرماركت","ايجار","سيارة","كهرباء","ماء","انترنت","مطاعم","صحة"];if(!data.cur)data.cur='JOD';
+function applyLang(l){curLang=l;localStorage.setItem('appLang',l);let t=trans[l]||trans.ar;document.querySelectorAll('[data-t]').forEach(el=>{let k=el.getAttribute('data-t');if(t[k])el.textContent=t[k];});document.documentElement.dir=l==='ar'?'rtl':'ltr';document.documentElement.lang=l;document.getElementById('langSel').value=l;document.getElementById('langSel2').value=l;}
 function switchTab(n){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+n).classList.add('active');document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));document.querySelector('[data-tab="'+n+'"]').classList.add('active');}
-let th=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',th);let tb=document.getElementById('themeToggle');tb.textContent=th==='dark'?'☀️':'🌙';tb.onclick=()=>{th=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',th);localStorage.setItem('theme',th);tb.textContent=th==='dark'?'☀️':'🌙';};
-let data=JSON.parse(localStorage.getItem('home_exp_v2')||'{"budget":0,"exp":[],"orders":[]}');if(!data.orders)data.orders=[];
-document.getElementById('monthName').textContent=new Date().toLocaleDateString('ar-JO',{month:'long',year:'numeric'});
+let th=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',th);let tb=document.getElementById('themeBtn');tb.textContent=th==='dark'?'☀️':'🌙';tb.onclick=()=>{th=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',th);localStorage.setItem('theme',th);tb.textContent=th==='dark'?'☀️':'🌙';};
+function curSym(){return currencies[data.cur]?.s||'د.أ';}
+function populateCurrencies(){let sel=document.getElementById('curSel');sel.innerHTML=Object.entries(currencies).map(([k,v])=>`<option value="${k}">${k} - ${v.n} - ${v.s}</option>`).join('');sel.value=data.cur;sel.onchange=e=>{data.cur=e.target.value;save();};}
+function populateCats(){let html=data.cats.map(c=>`<option value="${c}">${c}</option>`).join('');document.getElementById('eCat').innerHTML=html;document.getElementById('filterCat').innerHTML='<option value="all">الكل / All</option>'+html;document.getElementById('catsList').innerHTML=data.cats.map((c,i)=>`<span class="badge" style="margin:2px;display:inline-block">${c} <b onclick="delCat(${i})" style="color:red;cursor:pointer">×</b></span>`).join('');}
+function addCat(){let v=document.getElementById('newCat').value.trim();if(!v)return;data.cats.push(v);document.getElementById('newCat').value='';save();}
+function delCat(i){if(confirm('حذف؟')){data.cats.splice(i,1);save();}}
 function saveBudget(){data.budget=+document.getElementById('salary').value||0;save();}
-function addExpense(){let n=document.getElementById('eName').value,p=+document.getElementById('ePrice').value;if(!n||!p)return;data.exp.push({n,p,d:new Date().toLocaleDateString('ar-JO')});document.getElementById('eName').value='';document.getElementById('ePrice').value='';save();}
+function addExpense(){let cat=document.getElementById('eCat').value,n=document.getElementById('eName').value||cat,p=+document.getElementById('ePrice').value;if(!p)return;data.exp.push({cat,n,p,d:new Date().toLocaleDateString('ar-JO'),day:new Date().toISOString().slice(0,10),m:new Date().getMonth()});document.getElementById('eName').value='';document.getElementById('ePrice').value='';save();}
 function addOrder(){let n=document.getElementById('oName').value,p=+document.getElementById('oPrice').value;if(!n||!p)return;data.orders.push({n,p,d:new Date().toLocaleDateString('ar-JO')});document.getElementById('oName').value='';document.getElementById('oPrice').value='';save();}
 function save(){localStorage.setItem('home_exp_v2',JSON.stringify(data));render();}
-function render(){let spent=data.exp.reduce((a,b)=>a+b.p,0);let left=data.budget-spent;let perc=data.budget?Math.min(100,Math.round(spent/data.budget*100)):0;document.getElementById('budgetTxt').textContent=data.budget.toFixed(2)+' د.أ';document.getElementById('spentTxt').textContent=spent.toFixed(2)+' د.أ';document.getElementById('leftTxt').textContent=left.toFixed(2)+' د.أ';document.getElementById('spentBig').textContent=spent.toFixed(2)+' د.أ';document.getElementById('countTxt').textContent=data.exp.length+' عملات';document.getElementById('percentTxt').textContent=perc+'%';document.getElementById('circle').style.background='conic-gradient(var(--green) '+perc+'%, var(--border) '+perc+'%)';document.getElementById('list').innerHTML=data.exp.slice(-5).reverse().map((e,idx)=>{let ri=data.exp.length-1-idx;return '<div class="expense" onclick="editExp('+ri+')"><span>'+e.n+' <small style="color:var(--muted)">'+e.d+'</small> ✏️</span><span>'+e.p.toFixed(2)+'</span></div>'}).join('')||'لا يوجد';renderLog();renderReports();renderOrders();}
-function renderLog(){document.getElementById('logList').innerHTML=data.exp.map((e,i)=>'<div class="expense"><span onclick="editExp('+i+')" style="flex:1">'+e.n+' <small>'+e.d+'</small> ✏️</span><span>'+e.p.toFixed(2)+' <button onclick="delExp('+i+')" style="color:red;border:none;background:none">🗑️</button></span></div>').reverse().join('')||'لا يوجد';}
-function renderOrders(){document.getElementById('ordersList').innerHTML=data.orders.map((e,i)=>'<div class="expense"><span>'+e.n+' <small>'+e.d+'</small></span><span>'+e.p.toFixed(2)+' <button onclick="delOrder('+i+')" style="color:red;border:none;background:none">🗑️</button></span></div>').reverse().join('')||'لا يوجد';}
-function renderReports(){let spent=data.exp.reduce((a,b)=>a+b.p,0);let map={};data.exp.forEach(e=>{map[e.n]=(map[e.n]||0)+e.p});let sorted=Object.entries(map).sort((a,b)=>b[1]-a[1]);document.getElementById('reportsBox').innerHTML='<p>إجمالي: '+spent.toFixed(2)+' د.أ</p><p>عدد العمليات: '+data.exp.length+'</p><p>الباقي: '+(data.budget-spent).toFixed(2)+' د.أ</p>';document.getElementById('topCats').innerHTML=sorted.map(([k,v])=>'<div style="display:flex;justify-content:space-between;padding:6px 0"><span>'+k+'</span><b>'+v.toFixed(2)+'</b></div>').join('')||'لا يوجد';}
-function editExp(i){let e=data.exp[i];let newName=prompt('عدل الاسم:',e.n);if(newName===null)return;let newPrice=prompt('عدل السعر:',e.p);if(newPrice===null)return;data.exp[i].n=newName||e.n;data.exp[i].p=+newPrice||e.p;save();}
-function delExp(i){if(confirm('تحذف؟')){data.exp.splice(i,1);save();}}
+function saveAppName(){let v=document.getElementById('appNameInput').value;if(v){data.appName=v;document.getElementById('appName').textContent=v;save();}}
+function render(){let s=curSym();document.getElementById('curShow').textContent=s+' - '+data.cur;document.getElementById('appName').textContent=data.appName;document.getElementById('appNameInput').value=data.appName;
+let spent=data.exp.reduce((a,b)=>a+b.p,0);let left=data.budget-spent;let perc=data.budget?Math.min(100,Math.round(spent/data.budget*100)):0;
+document.getElementById('budgetTxt').textContent=data.budget.toFixed(2)+' '+s;document.getElementById('spentTxt').textContent=spent.toFixed(2)+' '+s;document.getElementById('leftTxt').textContent=left.toFixed(2)+' '+s;document.getElementById('spentBig').textContent=spent.toFixed(2)+' '+s;document.getElementById('countTxt').textContent=data.exp.length+' عمليات';document.getElementById('percentTxt').textContent=perc+'%';document.getElementById('circle').style.background=`conic-gradient(var(--green) ${perc}%, var(--border) ${perc}%)`;
+document.getElementById('list').innerHTML=data.exp.slice(-5).reverse().map((e,i)=>{let ri=data.exp.length-1-i;return `<div class="expense" onclick="editExp(${ri})"><span><b class="badge">${e.cat}</b> ${e.n} ✏️</span><span>${e.p.toFixed(2)} ${s}</span></div>`}).join('')||'لا يوجد';
+let filter=document.getElementById('filterCat').value;let filtered=filter==='all'||!filter?data.exp:data.exp.filter(e=>e.cat===filter);
+document.getElementById('logList').innerHTML=filtered.map((e,i)=>{let real=data.exp.indexOf(e);return `<div class="expense"><span onclick="editExp(${real})" style="flex:1"><b class="badge">${e.cat}</b> ${e.n} <small>${e.d}</small> ✏️</span><span>${e.p.toFixed(2)} ${s} <button onclick="delExp(${real})" style="color:red;border:none;background:none">🗑️</button></span></div>`}).reverse().join('')||'لا يوجد';
+document.getElementById('ordersList').innerHTML=data.orders.map((e,i)=>`<div class="expense"><span>${e.n} <small>${e.d}</small></span><span>${e.p.toFixed(2)} ${s} <button onclick="delOrder(${i})" style="color:red;border:none;background:none">🗑️</button></span></div>`).reverse().join('')||'لا يوجد';
+let map={};filtered.forEach(e=>{map[e.cat]=(map[e.cat]||0)+e.p});let sorted=Object.entries(map).sort((a,b)=>b[1]-a[1]);
+document.getElementById('topCats').innerHTML=sorted.slice(0,3).map(([k,v])=>`<div style="display:flex;justify-content:space-between;margin-top:8px"><span>${k}</span><b>${v.toFixed(2)} ${s}</b></div><div class="bar"><div style="width:${spent?Math.round(v/spent*100):0}%"></div></div>`).join('')||'لا يوجد';
+document.getElementById('reportsBox').innerHTML=`<p>💰 إجمالي هذا الشهر: ${spent.toFixed(2)} ${s}</p><p>📦 عدد العمليات: ${data.exp.length}</p><p>💵 الميزانية: ${data.budget.toFixed(2)} ${s}</p><p>✅ الباقي: ${left.toFixed(2)} ${s}</p>`;
+document.getElementById('reportByCat').innerHTML=sorted.map(([k,v])=>`<div style="display:flex;justify-content:space-between;padding:6px 0"><span>${k}</span><b>${v.toFixed(2)} ${s} (${spent?Math.round(v/spent*100):0}%)</b></div>`).join('')||'لا يوجد';
+let byDay={};let last7=[...Array(7)].map((_,i)=>{let d=new Date();d.setDate(d.getDate()-i);return d.toISOString().slice(0,10)}).reverse();byDay={};data.exp.forEach(e=>{if(last7.includes(e.day))byDay[e.day]=(byDay[e.day]||0)+e.p});document.getElementById('reportByDay').innerHTML=last7.map(d=>`<div style="display:flex;justify-content:space-between;padding:4px 0"><span>${d}</span><b>${(byDay[d]||0).toFixed(2)} ${s}</b></div>`).join('');
+let thisM=new Date().getMonth();let lastM=thisM===0?11:thisM-1;let spentThis=data.exp.filter(e=>e.m===thisM).reduce((a,b)=>a+b.p,0);let spentLast=data.exp.filter(e=>e.m===lastM).reduce((a,b)=>a+b.p,0);let diff=spentThis-spentLast;document.getElementById('reportCompare').innerHTML=`<p>هذا الشهر: ${spentThis.toFixed(2)} ${s}</p><p>الشهر الماضي: ${spentLast.toFixed(2)} ${s}</p><p style="color:${diff>0?'var(--red)':'var(--green)'}">${diff>0?'📈 زيادة ':'📉 توفير '}${Math.abs(diff).toFixed(2)} ${s}</p>`;
+populateCats();
+}
+function editExp(i){let e=data.exp[i];let n=prompt('عدل الاسم:',e.n);if(n===null)return;let p=prompt('عدل السعر:',e.p);if(p===null)return;let c=prompt('عدل القسم:',e.cat);if(c===null)return;data.exp[i].n=n||e.n;data.exp[i].p=+p||e.p;if(c)data.exp[i].cat=c;save();}
+function delExp(i){if(confirm('حذف؟')){data.exp.splice(i,1);save();}}
 function delOrder(i){let ri=data.orders.length-1-i;data.orders.splice(ri,1);save();}
 function clearAll(){if(confirm('مسح الكل؟')){data.exp=[];save();}}
-function updateClock(){let now=new Date();let days=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];let day=days[now.getDay()];let d=now.toLocaleDateString('ar-JO',{day:'numeric',month:'long',year:'numeric'});let t=now.toLocaleTimeString('ar-JO',{hour:'2-digit',minute:'2-digit',second:'2-digit'});let hij='';try{hij=new Intl.DateTimeFormat('ar-SA-islamic',{day:'numeric',month:'long',year:'numeric'}).format(now)}catch(e){}let el=document.getElementById('liveDate');if(el)el.innerHTML='📅 '+day+' • '+d+'<br>🕐 '+t+(hij?' • 🕌 '+hij:'');}setInterval(updateClock,1000);updateClock();applyLang(curLang);render();
+document.getElementById('langSel').onchange=e=>{applyLang(e.target.value);render();};document.getElementById('langSel2').onchange=e=>{applyLang(e.target.value);render();};document.getElementById('filterCat').onchange=render;
+document.getElementById('monthName').textContent=new Date().toLocaleDateString('ar-JO',{month:'long',year:'numeric'});
+function updateClock(){let now=new Date();let days=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];let day=days[now.getDay()];let d=now.toLocaleDateString('ar-JO',{day:'numeric',month:'long',year:'numeric'});let t=now.toLocaleTimeString('ar-JO',{hour:'2-digit',minute:'2-digit',second:'2-digit'});let hij='';try{hij=new Intl.DateTimeFormat('ar-SA-islamic',{day:'numeric',month:'long',year:'numeric'}).format(now)}catch(e){}let el=document.getElementById('liveDate');if(el)el.innerHTML=`📅 ${day} • ${d}<br>🕐 ${t} ${hij?' • 🕌 '+hij:''}`;}setInterval(updateClock,1000);updateClock();
+populateCurrencies();applyLang(curLang);render();
 if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 </script>
 </body>
