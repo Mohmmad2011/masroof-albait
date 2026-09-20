@@ -126,5 +126,20 @@ function updateClock(){let now=new Date();let days=['الأحد','الإثنين
 populateCurrencies();applyLang(curLang);render();
 if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 </script>
+<!-- قسم تحميل التطبيق مع QR -->
+<div style="text-align:center; padding:20px; background:#ffffff; margin:20px; border-radius:15px; border:2px solid #198754;">
+  <p style="font-weight:bold; font-size:18px; color:#198754; margin-bottom:10px;">📱 مصروفات المنزل</p>
+  
+  <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://mohmmad2011.github.io/masroof-albait/" 
+       style="width:160px; height:160px; border-radius:10px; border:4px solid #eee;">
+  
+  <p style="font-size:12px; color:#666; margin:10px 0;">امسح الكود بالكاميرا</p>
+
+  <div style="margin-top:10px;">
+    <a href="https://mohmmad2011.github.io/masroof-albait/" style="display:inline-block; background:#0d6efd; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin:5px;">🔗 فتح</a>
+    <a href="https://api.whatsapp.com/send?text=جرب تطبيق مصروفات المنزل https://mohmmad2011.github.io/masroof-albait/" style="display:inline-block; background:#25D366; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin:5px;">📤 واتساب</a>
+  </div>
+</div>
+
 </body>
 </html>
