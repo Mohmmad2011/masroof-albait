@@ -2,7 +2,6 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta name="google-site-verification" content="TZ-5-0xpT_RD0m8SvHwv0XTT1m93Cq_Y4QxlYivDpNM" />
-
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
   <link rel="manifest" href="manifest.json">
@@ -10,7 +9,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>مصروف المنزل</title>
 <style>
-<body> 
 :root{--bg:#f3f4f6;--card:#fff;--text:#111827;--muted:#6b7280;--green:#0f6d38;--greenL:#e6f4ea;--red:#ef4444;--blue:#3b82f6;--border:#e5e7eb;--blueL:#eff6ff;--redL:#fef2f2}
 [data-theme="dark"]{--bg:#0f0f0f;--card:#1e1e1e;--text:#f0f0f0;--muted:#9ca3af;--green:#22c55e;--greenL:#132a1a;--red:#f87171;--blue:#60a5fa;--border:#2a2a2a;--blueL:#162032;--redL:#2a1515}
 *{box-sizing:border-box;font-family:Tajawal,system-ui}body{margin:0;background:var(--bg);color:var(--text);padding-bottom:90px}
@@ -79,6 +77,22 @@ header{background:var(--green);color:#fff;padding:14px;position:sticky;top:0;z-i
 <hr style="margin:14px 0;border:none;border-top:1px solid var(--border)">
 <button class="btn" style="background:var(--red)" onclick="if(confirm('مسح؟')){localStorage.clear();location.reload()}" data-t="deleteAll">مسح كل البيانات</button>
 </div></div>
+
+<!-- قسم التحميل -->
+<div style="text-align:center; padding:20px; background:#ffffff; margin:20px 0; border-radius:15px; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
+  <p style="font-weight:bold; font-size:18px; color:#198754; margin-bottom:10px;">📲 حمل تطبيق مصروفات المنزل</p>
+  <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://mohmmad2011.github.io/masroof-almanzel/"
+       style="width:160px; height:160px; border-radius:10px; border:4px solid #eee;">
+  <p style="font-size:12px; color:#666; margin:10px 0;">امسح الكود بالكاميرا</p>
+  <div style="margin-top:15px;">
+    <a href="app-release.apk" download style="background:#ff6b00; color:white; padding:12px 25px; border-radius:10px; text-decoration:none; margin:5px; display:inline-block; font-weight:bold;">📦 تثبيت APK</a>
+    <br>
+    <a href="#" onclick="copyLink(); return false;" style="background:#6b7280; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin:5px; display:inline-block;">📋 نسخ الرابط</a>
+    <a href="#" onclick="shareWA(); return false;" style="background:#22c55e; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin:5px; display:inline-block;">💬 واتساب</a>
+  </div>
+  <p id="copyMsg" style="display:none; color:green; font-weight:bold; margin-top:10px;">✅ تم نسخ الرابط</p>
+</div>
+
 </div>
 
 <div class="bottom-nav">
@@ -127,38 +141,8 @@ function editExp(i){let e=data.exp[i];let n=prompt('عدل الاسم:',e.n);if(
 function delExp(i){if(confirm('حذف؟')){data.exp.splice(i,1);save();}}
 function delOrder(i){let ri=data.orders.length-1-i;data.orders.splice(ri,1);save();}
 function clearAll(){if(confirm('مسح الكل؟')){data.exp=[];save();}}
-document.getElementById('langSel').onchange=e=>{applyLang(e.target.value);render();};document.getElementById('langSel2').onchange=e=>{applyLang(e.target.value);render();};document.getElementById('filterCat').onchange=render;
-document.getElementById('monthName').textContent=new Date().toLocaleDateString('ar-JO',{month:'long',year:'numeric'});
-function updateClock(){let now=new Date();let days=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];let day=days[now.getDay()];let d=now.toLocaleDateString('ar-JO',{day:'numeric',month:'long',year:'numeric'});let t=now.toLocaleTimeString('ar-JO',{hour:'2-digit',minute:'2-digit',second:'2-digit'});let hij='';try{hij=new Intl.DateTimeFormat('ar-SA-islamic',{day:'numeric',month:'long',year:'numeric'}).format(now)}catch(e){}let el=document.getElementById('liveDate');if(el)el.innerHTML=`📅 ${day} • ${d}<br>🕐 ${t} ${hij?' • 🕌 '+hij:''}`;}setInterval(updateClock,1000);updateClock();
-populateCurrencies();applyLang(curLang);render();
-if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
-</script>
-<!-- قسم تحميل التطبيق مع QR - تم التعديل -->
-<div style="text-align:center; padding:20px; background:#ffffff; margin:20px; border-radius:15px; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
-  <p style="font-weight:bold; font-size:18px; color:#198754; margin-bottom:10px;">📲 حمل تطبيق مصروفات المنزل</p>
-  
-  <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://mohmmad2011.github.io/masroof-albait/?v=1000" 
-       style="width:160px; height:160px; border-radius:10px; border:4px solid #eee;">
-
-  <p style="font-size:12px; color:#666; margin:10px 0;">امسح الكود بالكاميرا</p>
-
-  <div style="margin-top:15px;">
-    <a href="https://mohmmad2011.github.io/masroof-albait/?v=1000" 
-       style="background:#2563eb; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin:5px; display:inline-block;">🔗 فتح على الموقع</a>
-    
-    <a href="#" onclick="copyLink(); return false;" 
-       style="background:#6b7280; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin:5px; display:inline-block;">📋 نسخ الرابط</a>
-    
-    <a href="#" onclick="shareWA(); return false;" 
-       style="background:#22c55e; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin:5px; display:inline-block;">💬 واتساب</a>
-<a href="./app-release.apk" download style="background:#ff6b00; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin:5px; display:inline-block; font-weight:bold;">📦 تثبيت APK</a>
-  </div>
-  <p id="copyMsg" style="display:none; color:green; font-weight:bold; margin-top:10px;">✅ تم نسخ الرابط</p>
-</div>
-
-<script>
 function copyLink(){
-  let link = "https://mohmmad2011.github.io/masroof-albait/?v=1000";
+  let link = "https://mohmmad2011.github.io/masroof-almanzel/";
   navigator.clipboard.writeText(link).then(()=>{
     let m=document.getElementById('copyMsg');
     m.style.display='block';
@@ -166,12 +150,14 @@ function copyLink(){
   });
 }
 function shareWA(){
-  let link = "https://mohmmad2011.github.io/masroof-albait/?v=1000";
-  // يفتح واتساب على نفس الموقع
+  let link = "https://mohmmad2011.github.io/masroof-almanzel/";
   window.location.href = "https://wa.me/?text="+encodeURIComponent(link);
 }
- </script>
- <a href="masroof.apk" download style="display:block; background:#ff6f00... 
- </body>
- </html>
-
+document.getElementById('langSel').onchange=e=>{applyLang(e.target.value);render();};document.getElementById('langSel2').onchange=e=>{applyLang(e.target.value);render();};document.getElementById('filterCat').onchange=render;
+document.getElementById('monthName').textContent=new Date().toLocaleDateString('ar-JO',{month:'long',year:'numeric'});
+function updateClock(){let now=new Date();let days=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];let day=days[now.getDay()];let d=now.toLocaleDateString('ar-JO',{day:'numeric',month:'long',year:'numeric'});let t=now.toLocaleTimeString('ar-JO',{hour:'2-digit',minute:'2-digit',second:'2-digit'});let hij='';try{hij=new Intl.DateTimeFormat('ar-SA-islamic',{day:'numeric',month:'long',year:'numeric'}).format(now)}catch(e){}let el=document.getElementById('liveDate');if(el)el.innerHTML=`📅 ${day} • ${d}<br>🕐 ${t} ${hij?' • 🕌 '+hij:''}`;}setInterval(updateClock,1000);updateClock();
+populateCurrencies();applyLang(curLang);render();
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+</script>
+</body>
+</html>
